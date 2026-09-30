@@ -11,8 +11,6 @@ npm run build     # production build into dist/
 npm run preview   # serve the production build locally
 ```
 
-Requires Node 22.12 or newer.
-
 ## Edit content
 
 Content lives in YAML under `src/data/`. You don't need to touch any `.astro` file for content changes.
