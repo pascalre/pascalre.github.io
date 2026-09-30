@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
+import Logo from '../components/Logo.astro';
 import Socials from '../components/Socials.astro';
 import Portrait from '../components/Portrait.astro';
 import PostList from '../components/PostList.astro';
@@ -64,8 +65,13 @@ const LATEST = 5;
         <li>
           <p class="when">{e.period}</p>
           <div>
-            <h3>{e.role}</h3>
-            <p class="where">{e.company}</p>
+            <div class="job-head">
+              <Logo name={e.company} icon={e.logo} class="logo--badge" />
+              <div>
+                <h3>{e.role}</h3>
+                <p class="where">{e.company}</p>
+              </div>
+            </div>
             {e.points && <ul>{e.points.map((pt) => <li>{pt}</li>)}</ul>}
           </div>
         </li>
@@ -81,6 +87,7 @@ const LATEST = 5;
         <ul class="certs">
           {skills.certifications.map((c) => (
             <li>
+              <Logo name={c.issuer} icon={c.logo} class="logo--badge" />
               {c.url ? <a href={c.url} target="_blank" rel="noopener">{c.name}</a> : <strong>{c.name}</strong>}
               <span>{c.issuer}{c.status && `, ${c.status.toLowerCase()}`}</span>
             </li>
@@ -91,15 +98,18 @@ const LATEST = 5;
         {skills.stack.map((g) => (
           <div>
             <dt>{g.group}</dt>
-            <dd><ul>{g.items.map((i) => <li>{i}</li>)}</ul></dd>
+            <dd><ul>{g.items.map((i) => {
+              const item = typeof i === 'string' ? { name: i } : i;
+              return <li><Logo name={item.name} icon={item.icon} />{item.name}</li>;
+            })}</ul></dd>
           </div>
         ))}
       </dl>
     </div>
   </section>
 
-  <section class="section" id="writing" aria-labelledby="writing-h">
-    <h2 id="writing-h">Writing</h2>
+  <section class="section" id="articles" aria-labelledby="articles-h">
+    <h2 id="articles-h">Articles</h2>
     <PostList posts={posts.slice(0, LATEST)} />
     {posts.length > LATEST && <p class="more"><a href="/blog/">All {posts.length} articles</a></p>}
   </section>

@@ -23,10 +23,11 @@ export interface Project {
   name: string; url: string; repo?: string; role: string;
   language: string; stars?: number; description: string;
 }
-export interface Job { role: string; company: string; period: string; points?: string[] }
+export interface Job { role: string; company: string; logo?: string; period: string; points?: string[] }
 export interface Skills {
-  certifications: { name: string; issuer: string; status?: string; url?: string }[];
-  stack: { group: string; items: string[] }[];
+  certifications: { name: string; issuer: string; logo?: string; status?: string; url?: string }[];
+  /** Items are a name ("Go") or { name, icon } when the logo file has a different name */
+  stack: { group: string; items: (string | { name: string; icon?: string })[] }[];
 }
 export interface ExternalPost { title: string; url: string; date?: string | Date; minutes?: number; where: string }
 

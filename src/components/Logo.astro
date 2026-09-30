@@ -1,0 +1,57 @@
+---
+// Logo for a company, school, tool or platform.
+// Looks for src/assets/logos/<slug>.svg (or .png/.webp/.jpg). The slug is the
+// `icon` prop, or the name in lower case with dashes ("Google Cloud" -> google-cloud).
+// If no file exists, it shows a monogram tile with the initials instead.
+import { Image } from 'astro:assets';
+
+interface Props { name: string; icon?: string; class?: string }
+const { name, icon, class: cls = '' } = Astro.props;
+
+const slugify = (s: string) =>
+  s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')
+    .replace(/\+/g, 'plus').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+
+const svgs = import.meta.glob<string>('../assets/logos/*.svg', { query: '?raw', import: 'default', eager: true });
+const rasters = import.meta.glob<{ default: ImageMetadata }>('../assets/logos/*.{png,webp,jpg,jpeg,avif}', { eager: true });
+const find = <T,>(files: Record<string, T>, slug: string) =>
+  Object.entries(files).find(([p]) => p.split('/').pop()!.replace(/\.[^.]+$/, '') === slug)?.[1];
+
+const slug = icon ?? slugify(name);
+let svg = find(svgs, slug);
+const raster = svg ? undefined : find(rasters, slug)?.default;
+
+if (svg) {
+  svg = svg
+    .replace(/<\?xml[^>]*>|<!DOCTYPE[^>]*>|<title>.*?<\/title>/gs, '')
+    // Keep ids unique on the page
+    .replace(/id="([^"]+)"/g, `id="${slug}-$1"`)
+    .replace(/url\(#([^)]+)\)/g, `url(#${slug}-$1)`)
+    .replace(/href="#([^"]+)"/g, `href="#${slug}-$1"`)
+    .replace(/<svg([^>]*)>/, (_m, attrs: string) =>
+      `<svg${attrs.replace(/\s(width|height|class|role)="[^"]*"/g, '')} class="logo-svg" aria-hidden="true" focusable="false">`);
+
+  // Very dark parts (black text, dark marks) switch to the text colour in dark
+  // mode, unless the logo sits on its own white background (e.g. Notion).
+  const hasWhite = /fill="#fff(fff)?"/i.test(svg);
+  if (!hasWhite) {
+    svg = svg.replace(/fill="#([0-9a-f]{3}|[0-9a-f]{6})"/gi, (m, hex: string) => {
+      const h = hex.length === 3 ? hex.replace(/./g, '$&$&') : hex;
+      const [r, g, b] = [0, 2, 4].map((i) => parseInt(h.slice(i, i + 2), 16) / 255);
+      const lum = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+      return lum < 0.25 ? `style="fill:var(--logo-ink,#${hex})"` : m;
+    });
+  }
+}
+
+// Monogram: an acronym like "DHBW" stays whole, otherwise the first letter(s)
+const words = name.replace(/[^\p{L}\p{N} ]/gu, '').split(/\s+/).filter(Boolean);
+const big = cls.includes('logo--badge');
+const initials = /^[A-Z]{2,4}$/.test(words[0] ?? '') && big ? words[0]
+  : words.map((w) => w[0]).join('').slice(0, big ? 2 : 1).toUpperCase();
+---
+<span class:list={['logo', cls, { 'logo--mono': !svg && !raster }]} title={name}>
+  {svg ? <Fragment set:html={svg} />
+    : raster ? <Image src={raster} alt="" width={96} />
+    : <span aria-hidden="true">{initials}</span>}
+</span>

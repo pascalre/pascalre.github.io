@@ -1,4 +1,5 @@
 certifications:     # TODO: list each Solace certification by its exact name
+  # The logo is taken from the issuer (Solace -> solace.svg), or set `logo: <file name>`.
   - name: Solace certifications
     issuer: Solace
     status: Refreshing in 2026
@@ -6,13 +7,25 @@ certifications:     # TODO: list each Solace certification by its exact name
     issuer: Google Cloud
     status: In progress
 stack:
+  # Logos come from src/assets/logos/<name>.svg, e.g. "Google Cloud" -> google-cloud.svg.
+  # Use { name, icon } when the file name differs from the label.
   - group: Languages
     items: [Go, TypeScript, Java]
   - group: Messaging and streaming
-    items: [Solace PubSub+, Kafka, AsyncAPI]
+    items:
+      - Solace
+      - Kafka
+      - TIBCO
   - group: Observability
-    items: [Prometheus, Grafana, OpenTelemetry, SigNoz, Elastic Stack]
+    items:
+      - Prometheus
+      - Grafana
+      - OpenTelemetry
+      - Elastic
   - group: Cloud and platform
-    items: [Google Cloud, Cloud Run, Azure, Kubernetes, Terraform]
+    items: [Google Cloud, Azure, Kubernetes, Terraform]
   - group: Everyday tools
-    items: [VS Code, Git and GitHub, Jira, Notion]
+    items:
+      - { name: VS Code, icon: vscode }
+      - Git
+      - Jira

@@ -30,6 +30,14 @@ Search for `TODO` to find everything that still needs your input.
 - **Photo:** save it as `src/assets/portrait.jpg` (`.png`, `.webp` or `.avif` work too).
   Portrait format 4:5 fits best, at least 1080 px wide. Astro generates optimised AVIF and
   WebP versions at build time. Without a photo, the hero shows your initials.
+- **Logos:** every tool, company, school, certification issuer and article platform gets a logo
+  from `src/assets/logos/<name>.svg`. The file name is the label in lower case with dashes
+  (`Google Cloud` → `google-cloud.svg`, `dmTECH` → `dmtech.svg`, `solace.com` → `solace.svg`).
+  If the file name differs, set `icon:` (tool stack) or `logo:` (experience, certifications).
+  `.png`, `.webp` and `.jpg` work too. Without a file, a monogram tile is shown.
+  Very dark logo parts switch to the text colour in dark mode automatically.
+  Included logos come from [gilbarbara/logos](https://github.com/gilbarbara/logos) and
+  [Simple Icons](https://simpleicons.org) (both CC0); the brands belong to their owners.
 - **About tiles:** `color` is `sun | mint | rose | sky | lilac`, `size` is `wide | tall | normal`.
   The grid has 4 columns, so order tiles so each row adds up to 4 (wide counts as 2).
 
@@ -57,8 +65,8 @@ The writing list merges three sources, newest first, without duplicates:
 src/
   data/            YAML content
   content/blog/    Markdown posts
-  assets/          portrait.jpg (hero photo, optimised at build time)
-  components/      Nav, Footer, Portrait, PostList, Socials, Icon
+  assets/          portrait.jpg (hero photo), logos/ (brand logos as SVG)
+  components/      Nav, Footer, Portrait, PostList, Socials, Icon, Logo
   layouts/         Base.astro (head, fonts, theme toggle)
   lib/             data.ts (YAML loader), posts.ts (merges writing sources)
   pages/           index, blog/index, blog/[...slug], 404
