@@ -1,0 +1,65 @@
+---
+import '@fontsource-variable/bricolage-grotesque';
+import '@fontsource-variable/onest';
+import '@fontsource-variable/jetbrains-mono';
+import '../styles/global.css';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import { profile } from '../lib/data';
+
+interface Props { title?: string; description?: string }
+const {
+  title = `${profile.name} · ${profile.role}`,
+  description = 'Senior Solutions Architect at Solace. I help engineering teams build event-driven systems and maintain open source tools for YAML and observability.',
+} = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:type" content="website" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <script is:inline>
+      try { var t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <Nav />
+    <main id="main"><slot /></main>
+    <Footer />
+
+    <script>
+      // Theme toggle: remembers the visitor's choice
+      const root = document.documentElement;
+      const systemDark = matchMedia('(prefers-color-scheme: dark)');
+      document.querySelector('.theme-toggle')?.addEventListener('click', () => {
+        const current = root.dataset.theme || (systemDark.matches ? 'dark' : 'light');
+        const next = current === 'dark' ? 'light' : 'dark';
+        root.dataset.theme = next;
+        try { localStorage.setItem('theme', next); } catch {}
+      });
+
+      // Live GitHub star counts (falls back to the numbers in projects.yml)
+      document.querySelectorAll<HTMLElement>('.stars[data-repo]').forEach(async (el) => {
+        try {
+          const res = await fetch(`https://api.github.com/repos/${el.dataset.repo}`);
+          if (!res.ok) return;
+          const { stargazers_count: n } = await res.json();
+          if (typeof n === 'number' && n > 0) {
+            el.querySelector('.stars-n')!.textContent = String(n);
+            el.hidden = false;
+          }
+        } catch { /* offline or rate limited */ }
+      });
+    </script>
+  </body>
+</html>

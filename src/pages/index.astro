@@ -1,0 +1,106 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import Socials from '../components/Socials.astro';
+import Portrait from '../components/Portrait.astro';
+import PostList from '../components/PostList.astro';
+import { profile, about, projects, experience, skills } from '../lib/data';
+import { getAllPosts } from '../lib/posts';
+
+const posts = await getAllPosts();
+const LATEST = 5;
+---
+<Base>
+  <section class="hero" id="top">
+    <div class="hero-text">
+      <h1>Hi, I’m {profile.first_name}.</h1>
+      <p class="lede">{profile.role}, based in {profile.location}. {profile.intro}</p>
+      <Socials />
+    </div>
+    <Portrait />
+  </section>
+
+  <section class="section" id="about" aria-labelledby="about-h">
+    <h2 id="about-h">Away from the keyboard</h2>
+    <div class="tiles">
+      {about.map((t) => (
+        <article class={`tile tile--${t.color} tile--${t.size ?? 'normal'}`}>
+          <span class="tile-emoji" aria-hidden="true">{t.emoji}</span>
+          <h3>{t.title}</h3>
+          {t.text && <p>{t.text}</p>}
+          {t.items && <ul>{t.items.map((i) => <li>{i}</li>)}</ul>}
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="section" id="work" aria-labelledby="work-h">
+    <h2 id="work-h">Things I build and maintain</h2>
+    <ul class="projects">
+      {projects.map((p) => (
+        <li class="project">
+          <a class="project-link" href={p.url} target="_blank" rel="noopener">
+            <h3>{p.name}</h3>
+            <p>{p.description}</p>
+            <p class="project-meta">
+              <span>{p.role}</span>
+              <span>{p.language}</span>
+              {p.repo && (
+                <span class="stars" data-repo={p.repo} hidden={!p.stars}>
+                  <Icon name="star" /><span class="stars-n">{p.stars}</span>
+                  <span class="visually-hidden"> stars on GitHub</span>
+                </span>
+              )}
+            </p>
+          </a>
+        </li>
+      ))}
+    </ul>
+    <p class="more"><a href="https://github.com/pascalre" target="_blank" rel="noopener">More on GitHub</a></p>
+
+    <h2 class="sub">Where I’ve worked</h2>
+    <ol class="timeline">
+      {experience.map((e) => (
+        <li>
+          <p class="when">{e.period}</p>
+          <div>
+            <h3>{e.role}</h3>
+            <p class="where">{e.company}</p>
+            {e.points && <ul>{e.points.map((pt) => <li>{pt}</li>)}</ul>}
+          </div>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <section class="section" id="skills" aria-labelledby="skills-h">
+    <h2 id="skills-h">What I work with</h2>
+    <div class="skills">
+      <div>
+        <h3 class="group">Certifications</h3>
+        <ul class="certs">
+          {skills.certifications.map((c) => (
+            <li>
+              {c.url ? <a href={c.url} target="_blank" rel="noopener">{c.name}</a> : <strong>{c.name}</strong>}
+              <span>{c.issuer}{c.status && `, ${c.status.toLowerCase()}`}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <dl class="stack">
+        {skills.stack.map((g) => (
+          <div>
+            <dt>{g.group}</dt>
+            <dd><ul>{g.items.map((i) => <li>{i}</li>)}</ul></dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <section class="section" id="writing" aria-labelledby="writing-h">
+    <h2 id="writing-h">Writing</h2>
+    <PostList posts={posts.slice(0, LATEST)} />
+    {posts.length > LATEST && <p class="more"><a href="/blog/">All {posts.length} articles</a></p>}
+  </section>
+</Base>

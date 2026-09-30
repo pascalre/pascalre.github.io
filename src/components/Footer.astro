@@ -1,0 +1,11 @@
+---
+import Socials from './Socials.astro';
+import { profile } from '../lib/data';
+const year = new Date().getFullYear();
+---
+<footer class="footer">
+  <h2>Let’s talk events.</h2>
+  <p>Questions about Solace, a bug in one of my tools, or just want to say hello? Find me here:</p>
+  <Socials />
+  <p class="fine">© {year} {profile.name}. Content kept in YAML, sorted with YAML Sort, built with Astro.</p>
+</footer>

@@ -1,0 +1,40 @@
+# Tiles in the "About me" section.
+# color: sun | mint | rose | sky | lilac      size: wide | tall | normal
+- title: Family
+  emoji: "🏡"
+  color: sun
+  size: wide
+  text: >-
+    TODO: One or two sentences about your family. Keep it as personal
+    as you like, this is the human part of the page.
+- title: Clubs
+  emoji: "🤝"
+  color: mint
+  size: tall
+  text: Where you can find me outside of work.
+  items:           # TODO: your memberships
+    - TODO Verein name, role
+    - TODO Verein name, role
+- title: Hobbies
+  emoji: "🚴"
+  color: rose
+  size: normal
+  items:           # TODO
+    - TODO hobby
+    - TODO hobby
+    - TODO hobby
+- title: Based in Karlsruhe
+  emoji: "📍"
+  color: lilac
+  size: wide
+  text: >-
+    Working remote-first from Karlsruhe, Germany, with customers all over
+    the world.
+- title: Currently learning
+  emoji: "📚"
+  color: sky
+  size: normal
+  items:
+    - French
+    - Google Cloud Associate Cloud Engineer
+    - Event-driven API governance at scale

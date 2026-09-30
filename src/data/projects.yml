@@ -1,0 +1,33 @@
+# Open source and demo projects. "repo" enables live GitHub star counts.
+- name: vscode-yaml-sort
+  repo: pascalre/vscode-yaml-sort
+  url: https://github.com/pascalre/vscode-yaml-sort
+  role: Author and maintainer
+  language: TypeScript
+  stars: 46
+  description: >-
+    A VS Code extension that sorts, formats and validates YAML files,
+    including custom key orders for Kubernetes and Helm.
+- name: solace-prometheus-exporter
+  repo: solacecommunity/solace-prometheus-exporter
+  url: https://github.com/solacecommunity/solace-prometheus-exporter
+  role: Maintainer
+  language: Go
+  description: >-
+    Exposes metrics from Solace event brokers to Prometheus, so you can
+    watch queues, clients and message rates in Grafana.
+- name: Orbital Mesh
+  repo: pascalre/orbital-mesh
+  url: https://github.com/pascalre/orbital-mesh
+  role: Author
+  language: Go, Three.js
+  description: >-
+    A live demo that tracks satellites and streams their positions as
+    events over WebSockets into a 3D globe.
+- name: Webshop Event Feed
+  url: https://feeds.solace.dev/feed/?name=Webshop&isLocal=false&type=asyncapi_feed
+  role: Author
+  language: AsyncAPI
+  description: >-
+    A sample event feed covering the whole purchase lifecycle, from
+    abandoned carts to orders, cancellations and returns.

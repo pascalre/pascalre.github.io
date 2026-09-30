@@ -1,0 +1,19 @@
+---
+import { formatMonth, type PostItem } from '../lib/posts';
+interface Props { posts: PostItem[] }
+const { posts } = Astro.props;
+---
+<ul class="posts">
+  {posts.map((p) => (
+    <li>
+      <a href={p.url} {...(p.local ? {} : { target: '_blank', rel: 'noopener' })}>
+        <span class="post-title">{p.title}</span>
+        <span class="post-meta">
+          {p.date && <time datetime={p.date.toISOString().slice(0, 10)}>{formatMonth(p.date)}</time>}
+          {p.minutes && <span>{p.minutes} min</span>}
+          <span>{p.where}</span>
+        </span>
+      </a>
+    </li>
+  ))}
+</ul>

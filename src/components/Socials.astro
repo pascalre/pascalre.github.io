@@ -1,0 +1,12 @@
+---
+import Icon from './Icon.astro';
+import { links, profile } from '../lib/data';
+---
+<ul class="socials">
+  {links.map((l) => (
+    <li><a href={l.url} rel="me noopener" target="_blank"><Icon name={l.icon} /><span>{l.name}</span></a></li>
+  ))}
+  {profile.email && (
+    <li><a href={`mailto:${profile.email}`}><Icon name="mail" /><span>Email</span></a></li>
+  )}
+</ul>

@@ -1,0 +1,18 @@
+certifications:     # TODO: list each Solace certification by its exact name
+  - name: Solace certifications
+    issuer: Solace
+    status: Refreshing in 2026
+  - name: Associate Cloud Engineer
+    issuer: Google Cloud
+    status: In progress
+stack:
+  - group: Languages
+    items: [Go, TypeScript, Java]
+  - group: Messaging and streaming
+    items: [Solace PubSub+, Kafka, AsyncAPI]
+  - group: Observability
+    items: [Prometheus, Grafana, OpenTelemetry, SigNoz, Elastic Stack]
+  - group: Cloud and platform
+    items: [Google Cloud, Cloud Run, Azure, Kubernetes, Terraform]
+  - group: Everyday tools
+    items: [VS Code, Git and GitHub, Jira, Notion]

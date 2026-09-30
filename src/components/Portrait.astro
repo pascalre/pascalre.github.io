@@ -1,0 +1,30 @@
+---
+// Hero photo. Drop a file named portrait.jpg (or .png, .webp, .avif) into
+// src/assets/ and Astro generates optimised AVIF/WebP versions at build time.
+import { Picture } from 'astro:assets';
+import { profile } from '../lib/data';
+
+const files = import.meta.glob<{ default: ImageMetadata }>(
+  '../assets/portrait.{jpg,jpeg,png,webp,avif}',
+  { eager: true },
+);
+const photo = Object.values(files)[0]?.default;
+---
+<figure class="photo">
+  {photo ? (
+    <Picture
+      src={photo}
+      formats={['avif', 'webp']}
+      widths={[360, 540, 720, 1080]}
+      sizes="(max-width: 860px) min(90vw, 26rem), 28rem"
+      alt={`Portrait of ${profile.name}`}
+      loading="eager"
+      fetchpriority="high"
+    />
+  ) : (
+    <div class="photo-placeholder">
+      <span aria-hidden="true">{profile.initials}</span>
+      {import.meta.env.DEV && <small>Add src/assets/portrait.jpg</small>}
+    </div>
+  )}
+</figure>

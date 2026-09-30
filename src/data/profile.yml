@@ -1,0 +1,11 @@
+name: Pascal Reitermann
+first_name: Pascal
+initials: PR
+role: Senior Solutions Architect at Solace
+location: Karlsruhe, Germany
+# Photo: put portrait.jpg (4:5 works best) into src/assets/
+intro: >-
+  I help engineering teams design event-driven systems that hold up in
+  production, and I teach them how to run those systems themselves.
+  In my spare time I maintain open source tools for YAML and observability.
+email: ""   # TODO: e.g. hello@yourdomain.de (leave empty to hide)

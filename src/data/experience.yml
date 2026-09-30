@@ -1,0 +1,22 @@
+# Newest first. TODO: fill in the real periods.
+- role: Senior Solutions Architect, Training & Enablement
+  company: Solace
+  period: 20XX – today
+  points:
+    - Deliver the Solace Workshop Series to customers around the world.
+    - Write architecture guidance, such as the guide to migrating from TIBCO EMS to Solace.
+    - Build demos and event feeds that show event-driven architecture working end to end.
+- role: Customer Technical Trainer
+  company: Solace
+  period: 20XX – 20XX
+  points:
+    - Trained customer engineering teams on Solace event brokers and event-driven design.
+    - Built training content and hands-on labs.   # TODO: adjust
+- role: DevOps and Integration Engineer
+  company: dmTECH
+  period: 20XX – 20XX
+  points:
+    - Worked in the integration team on platform and integration engineering.   # TODO: be specific
+- role: B.Sc. Applied Computer Science
+  company: TODO University
+  period: 20XX – 20XX

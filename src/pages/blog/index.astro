@@ -1,0 +1,16 @@
+---
+import Base from '../../layouts/Base.astro';
+import PostList from '../../components/PostList.astro';
+import { getAllPosts } from '../../lib/posts';
+import { profile } from '../../lib/data';
+const posts = await getAllPosts();
+---
+<Base title={`Writing · ${profile.name}`} description="Articles about event-driven architecture, Solace, observability and DevOps.">
+  <section class="section page-head">
+    <h1>Writing</h1>
+    <p class="lede">Notes from the field on event-driven architecture, Solace, observability and running things in production.</p>
+  </section>
+  <section class="section section--tight">
+    <PostList posts={posts} />
+  </section>
+</Base>

@@ -1,0 +1,32 @@
+# Articles published elsewhere (solace.com, grafana.com, ...).
+# dev.to articles are imported automatically at build time; the DEV entries
+# below are only a fallback in case the dev.to API is unreachable.
+# date: YYYY-MM-DD
+- title: Your Solace Prometheus Exporter Deserves a Better Pipeline
+  url: https://dev.to/reitermann/your-solace-prometheus-exporter-deserves-a-better-pipeline-3i6i
+  date: 2026-06-26
+  minutes: 6
+  where: DEV
+- title: "Design-First or Infrastructure-as-Code? Choosing the Source of Truth for your Solace Broker"
+  url: https://dev.to/reitermann/design-first-or-infrastructure-as-code-choosing-the-source-of-truth-for-your-solace-broker-33di
+  date: 2026-03-11
+  minutes: 3
+  where: DEV
+- title: "My AI Agent Mesh Portfolio Backend for the New Year, New You Challenge"
+  url: https://dev.to/pascalre/unlocking-the-future-my-ai-agent-mesh-portfolio-backend-for-the-new-year-new-you-challenge-3cam
+  date: 2026-01-09
+  minutes: 3
+  where: DEV
+- title: "PEM vs. PKCS#12 (P12/PFX): Understanding the Difference Between Certificate Formats"
+  url: https://dev.to/reitermann/pem-vs-pkcs12-p12pfx-understanding-the-difference-between-certificate-formats-1b9d
+  date: 2025-12-26
+  minutes: 3
+  where: DEV
+- title: "Securing Solace Metrics: How to Use OAuth with solace-prometheus-exporter"
+  url: https://dev.to/reitermann/securing-solace-metrics-how-to-use-oauth-with-solace-prometheus-exporter-2i6l
+  date: 2025-12-19
+  minutes: 9
+  where: DEV
+- title: The Architect's Guide to Migrating from TIBCO EMS to Solace
+  url: https://solace.com/wp/migrating-tibco-ems-solace/
+  where: solace.com
