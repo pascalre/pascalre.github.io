@@ -323,6 +323,9 @@ code { font-family: var(--mono); font-size: .88em; }
 .footer { padding-block: clamp(5rem, 10vw, 8rem) 3rem; }
 .footer > p:first-of-type { color: var(--muted); max-width: 34rem; font-size: 1.1rem; }
 .fine { margin-top: 4rem; color: var(--muted); font-size: .88rem; }
+.fine a { color: inherit; text-underline-offset: .2em; }
+.fine a:hover { color: var(--ink); }
+.prose address { font-style: normal; }
 
 /* ---------- Blog index, articles, 404 ---------- */
 .page-head { padding-bottom: 0; }

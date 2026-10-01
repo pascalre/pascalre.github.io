@@ -1,0 +1,37 @@
+---
+import Base from '../layouts/Base.astro';
+import { legal } from '../lib/data';
+---
+<Base title={`Legal · ${legal.name}`} description="Legal notice" noindex>
+  <article class="article">
+    <h1>Legal</h1>
+    <p class="lede">Legal notice as required by German law.</p>
+    <div class="prose">
+      <h2>Information according to § 5 DDG</h2>
+      <address>
+        {legal.name}<br />
+        {legal.street}<br />
+        {legal.city}<br />
+        {legal.country}
+      </address>
+
+      <h2>Contact</h2>
+      <p>Email: <a href={`mailto:${legal.email}`}>{legal.email}</a></p>
+
+      <h2>Responsible for content according to § 18 (2) MStV</h2>
+      <address>
+        {legal.name}<br />
+        {legal.street}<br />
+        {legal.city}<br />
+        {legal.country}
+      </address>
+
+      <h2>Note</h2>
+      <p>
+        This is my personal website. The views expressed here are my own and not those
+        of my employer. Trademarks and logos belong to their respective owners and are
+        used only to identify the tools and organisations I work or have worked with.
+      </p>
+    </div>
+  </article>
+</Base>

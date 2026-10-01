@@ -5,10 +5,12 @@ import Logo from '../components/Logo.astro';
 import Socials from '../components/Socials.astro';
 import Portrait from '../components/Portrait.astro';
 import PostList from '../components/PostList.astro';
-import { profile, about, projects, experience, skills } from '../lib/data';
+import { profile, about, experience, skills } from '../lib/data';
+import { withStars } from '../lib/github';
 import { getAllPosts } from '../lib/posts';
 
 const posts = await getAllPosts();
+const projects = await withStars();
 const LATEST = 5;
 ---
 <Base>
@@ -47,8 +49,8 @@ const LATEST = 5;
               <span>{p.role}</span>
               <span>{p.language}</span>
               {p.repo && (
-                <span class="stars" data-repo={p.repo} hidden={!p.stars}>
-                  <Icon name="star" /><span class="stars-n">{p.stars}</span>
+                <span class="stars" hidden={!p.stars}>
+                  <Icon name="star" /><span>{p.stars}</span>
                   <span class="visually-hidden"> stars on GitHub</span>
                 </span>
               )}

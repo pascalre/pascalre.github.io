@@ -25,6 +25,9 @@ jobs:
         uses: actions/checkout@v7
       - name: Install, build and upload
         uses: withastro/action@v6
+        env:
+          # Higher rate limit for the star counts fetched at build time
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   deploy:
     needs: build

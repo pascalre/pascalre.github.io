@@ -7,6 +7,7 @@ import projectsRaw from '../data/projects.yml?raw';
 import experienceRaw from '../data/experience.yml?raw';
 import skillsRaw from '../data/skills.yml?raw';
 import postsRaw from '../data/posts.yml?raw';
+import legalRaw from '../data/legal.yml?raw';
 
 export interface Profile {
   name: string; first_name: string; initials: string; role: string;
@@ -29,6 +30,7 @@ export interface Skills {
   /** Items are a name ("Go") or { name, icon } when the logo file has a different name */
   stack: { group: string; items: (string | { name: string; icon?: string })[] }[];
 }
+export interface Legal { name: string; street: string; city: string; country: string; email: string; updated: string | Date }
 export interface ExternalPost { title: string; url: string; date?: string | Date; minutes?: number; where: string }
 
 const y = <T>(raw: string) => load(raw) as T;
@@ -40,3 +42,4 @@ export const projects = y<Project[]>(projectsRaw);
 export const experience = y<Job[]>(experienceRaw);
 export const skills = y<Skills>(skillsRaw);
 export const externalPosts = y<ExternalPost[]>(postsRaw);
+export const legal = y<Legal>(legalRaw);

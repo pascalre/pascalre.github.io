@@ -1,0 +1,8 @@
+# Used by the legal and privacy pages (src/pages/legal.astro, privacy.astro)
+name: Pascal Reitermann
+street: Jahnstr. 4
+city: 76337 Waldbronn
+country: Germany
+email: pascalreitermann@gmail.com
+# Date shown as "Last updated" in the privacy policy. Update it when you change the page.
+updated: 2026-10-01
