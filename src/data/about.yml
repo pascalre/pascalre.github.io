@@ -1,20 +1,37 @@
 # Tiles in the "About me" section.
 # color: sun | mint | rose | sky | lilac      size: wide | tall | normal
+# The grid has 4 columns: order tiles so each row adds up to 4 (wide = 2).
+#
+# Photo tiles: set `photo` to a file in src/assets/photos/. The photo fills the
+# tile and title/text are shown on top of it. Without title and text it is a
+# pure photo tile. `alt` describes the photo for screen readers, `position`
+# moves the crop (e.g. "50% 25%" keeps faces in view). Until the file exists,
+# `npm run dev` shows a placeholder and the live site skips pure photo tiles.
 - title: Family
-  emoji: "🏡"
-  color: sun
+  photo: family.jpg
+  alt: TODO describe the photo, e.g. "Pascal with his family on a hike"
   size: wide
   text: >-
     TODO: One or two sentences about your family. Keep it as personal
     as you like, this is the human part of the page.
+- title: Football
+  photo: football.jpg
+  alt: TODO describe the photo
+  size: tall
+  text: TODO one line, e.g. your club or the team you support.
 - title: Clubs
   emoji: "🤝"
   color: mint
-  size: tall
+  size: normal
   text: Where you can find me outside of work.
   items:           # TODO: your memberships
     - TODO Verein name, role
     - TODO Verein name, role
+- title: Where I’m from
+  photo: home.jpg
+  alt: TODO describe the photo, e.g. "View over my home town"
+  size: wide
+  text: TODO a sentence about your home town.
 - title: Hobbies
   emoji: "🚴"
   color: rose
@@ -33,7 +50,7 @@
 - title: Currently learning
   emoji: "📚"
   color: sky
-  size: normal
+  size: wide
   items:
     - French
     - Google Cloud Associate Cloud Engineer

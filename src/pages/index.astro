@@ -2,6 +2,8 @@
 import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
 import Logo from '../components/Logo.astro';
+import Photo from '../components/Photo.astro';
+import { photo, isLandscape } from '../lib/photos';
 import Socials from '../components/Socials.astro';
 import Portrait from '../components/Portrait.astro';
 import PostList from '../components/PostList.astro';
@@ -26,14 +28,26 @@ const LATEST = 5;
   <section class="section" id="about" aria-labelledby="about-h">
     <h2 id="about-h">Away from the keyboard</h2>
     <div class="tiles">
-      {about.map((t) => (
-        <article class={`tile tile--${t.color} tile--${t.size ?? 'normal'}`}>
-          <span class="tile-emoji" aria-hidden="true">{t.emoji}</span>
-          <h3>{t.title}</h3>
-          {t.text && <p>{t.text}</p>}
-          {t.items && <ul>{t.items.map((i) => <li>{i}</li>)}</ul>}
-        </article>
-      ))}
+      {about.map((t) => {
+        const img = photo(t.photo);
+        const hasText = !!(t.title || t.text || t.items);
+        if (t.photo && !img && !hasText && !import.meta.env.DEV) return null;
+        const cls = ['tile', `tile--${t.color ?? 'sky'}`, `tile--${t.size ?? 'normal'}`, (img || (t.photo && import.meta.env.DEV)) && 'tile--photo', !hasText && 'tile--bare'];
+        return (
+          <article class:list={cls}>
+            {t.photo && <Photo src={t.photo} alt={t.alt ?? t.title ?? ''} position={t.position} class="tile-img"
+              sizes={t.size === 'wide' ? '(max-width: 560px) 92vw, (max-width: 860px) 92vw, 34rem' : '(max-width: 560px) 92vw, (max-width: 860px) 46vw, 17rem'} />}
+            {hasText && (
+              <div class="tile-body">
+                {t.emoji && !img && <span class="tile-emoji" aria-hidden="true">{t.emoji}</span>}
+                {t.title && <h3>{t.title}</h3>}
+                {t.text && <p>{t.text}</p>}
+                {t.items && <ul>{t.items.map((i) => <li>{i}</li>)}</ul>}
+              </div>
+            )}
+          </article>
+        );
+      })}
     </div>
   </section>
 
@@ -75,6 +89,22 @@ const LATEST = 5;
               </div>
             </div>
             {e.points && <ul>{e.points.map((pt) => <li>{pt}</li>)}</ul>}
+            {e.photos?.some((ph) => photo(ph.src) || import.meta.env.DEV) && (
+              <div class="job-photos">
+                {e.photos.map((ph) => {
+                  const img = photo(ph.src);
+                  if (!img && !import.meta.env.DEV) return null;
+                  const wide = img ? isLandscape(img) : false;
+                  return (
+                    <figure class:list={['job-photo', wide ? 'job-photo--wide' : 'job-photo--tall']}>
+                      <Photo src={ph.src} alt={ph.alt} position={ph.position}
+                        sizes={wide ? '(max-width: 560px) 85vw, 26rem' : '(max-width: 560px) 40vw, 12rem'} />
+                      {ph.caption && <figcaption>{ph.caption}</figcaption>}
+                    </figure>
+                  );
+                })}
+              </div>
+            )}
           </div>
         </li>
       ))}

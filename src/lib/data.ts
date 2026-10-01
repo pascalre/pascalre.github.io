@@ -15,8 +15,10 @@ export interface Profile {
 }
 export interface Link { name: string; url: string; icon: string }
 export interface Tile {
-  title: string; emoji: string;
-  color: 'sun' | 'mint' | 'rose' | 'sky' | 'lilac';
+  title?: string; emoji?: string;
+  /** Photo tile: the image fills the tile, title/text sit on top of it */
+  photo?: string; alt?: string; position?: string;
+  color?: 'sun' | 'mint' | 'rose' | 'sky' | 'lilac';
   size?: 'wide' | 'tall' | 'normal';
   text?: string; items?: string[];
 }
@@ -24,14 +26,16 @@ export interface Project {
   name: string; url: string; repo?: string; role: string;
   language: string; stars?: number; description: string;
 }
-export interface Job { role: string; company: string; logo?: string; period: string; points?: string[] }
+/** A photo in src/assets/photos. `position` is a CSS object-position, e.g. "50% 20%" to keep faces in view. */
+export interface PhotoRef { src: string; alt: string; caption?: string; position?: string }
+export interface Job { role: string; company: string; logo?: string; period: string; points?: string[]; photos?: PhotoRef[] }
 export interface Skills {
   certifications: { name: string; issuer: string; logo?: string; status?: string; url?: string }[];
   /** Items are a name ("Go") or { name, icon } when the logo file has a different name */
   stack: { group: string; items: (string | { name: string; icon?: string })[] }[];
 }
 export interface Legal { name: string; street: string; city: string; country: string; email: string; updated: string | Date }
-export interface ExternalPost { title: string; url: string; date?: string | Date; minutes?: number; where: string }
+export interface ExternalPost { title: string; url: string; date?: string | Date; minutes?: number; where: string; logo?: string }
 
 const y = <T>(raw: string) => load(raw) as T;
 

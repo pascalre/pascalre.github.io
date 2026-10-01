@@ -1,8 +1,9 @@
 ---
 import Logo from './Logo.astro';
 import { formatMonth, type PostItem } from '../lib/posts';
-// "solace.com" -> solace.svg, "DEV" -> dev.svg
-const platform = (where: string) => where.toLowerCase().replace(/\.(com|io|dev|de|org|net)$/, '');
+// Logo file: "solace.com" -> solace.svg, "DEV" -> dev.svg,
+// "The Retail Optimiser" -> the-retail-optimiser.svg, or set `logo:` in posts.yml
+const platform = (where: string) => where.replace(/\.(com|io|dev|de|org|net)$/, '');
 interface Props { posts: PostItem[] }
 const { posts } = Astro.props;
 ---
@@ -14,7 +15,7 @@ const { posts } = Astro.props;
         <span class="post-meta">
           {p.date && <time datetime={p.date.toISOString().slice(0, 10)}>{formatMonth(p.date)}</time>}
           {p.minutes && <span>{p.minutes} min</span>}
-          {p.local ? <span>{p.where}</span> : <span class="post-where"><Logo name={p.where} icon={platform(p.where)} />{p.where}</span>}
+          {p.local ? <span>{p.where}</span> : <span class="post-where"><Logo name={platform(p.where)} icon={p.logo} />{p.where}</span>}
         </span>
       </a>
     </li>

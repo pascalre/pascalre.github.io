@@ -1,0 +1,19 @@
+---
+// A responsive photo from src/assets/photos (see lib/photos.ts).
+// Renders nothing if the file is missing, so YAML can reference photos
+// before they are added. In `npm run dev` a hint is shown instead.
+import { Picture } from 'astro:assets';
+import { photo } from '../lib/photos';
+
+interface Props { src?: string; alt: string; sizes: string; widths?: number[]; class?: string; position?: string }
+const { src, alt, sizes, widths = [320, 480, 720, 960, 1280], class: cls, position } = Astro.props;
+const img = photo(src);
+const usable = img ? widths.filter((w) => w <= img.width) : [];
+if (img && usable.length === 0) usable.push(img.width);
+---
+{img ? (
+  <Picture src={img} alt={alt} formats={['avif', 'webp']} widths={usable} sizes={sizes}
+    loading="lazy" decoding="async" class={cls} style={position ? `object-position: ${position}` : undefined} />
+) : src && import.meta.env.DEV ? (
+  <span class:list={['photo-missing', cls]}>Add src/assets/photos/{src}</span>
+) : null}

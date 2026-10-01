@@ -2,6 +2,7 @@
 # dev.to articles are imported automatically at build time; the DEV entries
 # below are only a fallback in case the dev.to API is unreachable.
 # date: YYYY-MM-DD
+# logo: optional file name in src/assets/logos/, otherwise taken from `where`
 - title: The Architect's Guide to Migrating from TIBCO EMS to Solace
   url: https://solace.com/wp/migrating-tibco-ems-solace/
   date: 2026-07-01
@@ -31,3 +32,4 @@
   date: 2025-12-12
   minutes: 9
   where: The Retail Optimiser
+  logo: the-retail-optimiser   # src/assets/logos/retail-optimiser.svg (or .png)

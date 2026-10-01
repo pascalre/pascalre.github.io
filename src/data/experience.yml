@@ -1,5 +1,7 @@
 # Newest first. TODO: fill in the real periods.
 # The logo is src/assets/logos/<company>.svg (dmTECH -> dmtech.svg), or set `logo: <file name>`.
+# photos: files in src/assets/photos/. Portrait photos are shown as small tilted
+# prints, landscape photos wider. Missing files are skipped on the live site.
 - role: Senior Solutions Architect
   company: Solace
   period: 2026 – today
@@ -13,11 +15,22 @@
   points:
     - Trained customer engineering teams on Solace event brokers and event-driven design.
     - Built training content and hands-on labs.   # TODO: adjust
+  photos:
+    - src: solace-messeturm.jpeg
+      alt: The Solace office in the Messeturm in Frankfurt
+      caption: Solace’s office in the Messeturm, Frankfurt
 - role: DevOps and Integration Engineer
   company: dmTECH
   period: 2016 – 2026
   points:
     - Worked in the integration team on platform and integration engineering.   # TODO: be specific
+  photos:
+    - src: dm-dialogicum.jpeg
+      alt: The dm Dialogicum office building in Karlsruhe
+      caption: The dm-dialogicum in Karlsruhe
+    - src: solace-user-group.jpeg
+      alt: Pascal on stage presenting at the Solace User Group
+      caption: Speaking about dm’s event-driven journey at the Solace User Group
 - role: Co-op working Student
   company: dmTECH
   period: 2013 – 2016

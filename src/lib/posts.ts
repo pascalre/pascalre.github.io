@@ -11,6 +11,8 @@ export interface PostItem {
   date?: Date;
   minutes?: number;
   where: string;
+  /** Logo file name in src/assets/logos (defaults to the platform name) */
+  logo?: string;
   local: boolean;
 }
 
@@ -79,6 +81,7 @@ export function getAllPosts(): Promise<PostItem[]> {
       date: p.date ? new Date(p.date) : undefined,
       minutes: p.minutes,
       where: p.where,
+      logo: p.logo,
       local: false,
     }));
     const seen = new Set<string>();
